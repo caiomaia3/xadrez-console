@@ -18,10 +18,42 @@ namespace tabuleiro
         {
             return pecas[linha, coluna];
         }
-        public void ColocarPeca(Peca p, Posicao pos)
+        public Peca peca(Posicao pos)
         {
+            return pecas[pos.linha, pos.coluna];
+        }
+
+        public void colocarPeca(Peca p, Posicao pos)
+        {
+            if (existePeca(pos))
+            {
+                throw new TabuleiroException("Já existe uma peça nesta posição.");
+            }
             p.posicao = pos;
             pecas[pos.linha, pos.coluna] = p;
+        }
+
+        public bool existePeca(Posicao pos)
+        {
+            validarPosicao(pos);
+            return this.pecas[pos.linha,pos.coluna] != null;
+        }
+
+        public bool posicaoValida(Posicao pos)
+        {
+            if (pos.linha>=0 && pos.linha<this.nLinhas && pos.coluna>=0 && pos.coluna<this.nColunas )
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public void validarPosicao(Posicao pos)
+        {
+            if (!posicaoValida(pos))
+            {
+                throw new TabuleiroException("Posição inválida!");
+            }
         }
     }
 }
