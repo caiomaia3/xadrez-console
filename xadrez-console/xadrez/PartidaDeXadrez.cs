@@ -6,8 +6,8 @@ namespace xadrez
     class PartidaDeXadrez
     {
         public Tabuleiro tab { get; private set; }
-        private int turno;
-        private Cor jogadorAtual;
+        public int turno { get; private set; }
+        public Cor jogadorAtual { get; private set; }
         public bool terminada { get; set; }
 
         public PartidaDeXadrez()
@@ -27,6 +27,48 @@ namespace xadrez
             tab.colocarPeca(p, pDestino);
         }
 
+        public void realizaJogada(Posicao pOrigem, Posicao pDestino)
+        {
+            executaMovimento(pOrigem,pDestino);
+            turno++;
+            mudarJogador();
+        }   
+
+        public void validarPosicaoOrigem(Posicao p)
+        {
+            if (tab.peca(p) == null)
+            {
+                throw new TabuleiroException("Não existe peça na posição de origem escolhida!");
+            }
+            if (tab.peca(p).cor != jogadorAtual)
+            {
+                throw new TabuleiroException("A peça de origem escolhida não é sua!");
+            }
+            if (!tab.peca(p).existeMovimentosPossiveis())
+            {
+                throw new TabuleiroException("Não há movimento possíveis para a peça escolhida!");
+            }
+        }
+
+        public void validarPosicaoDeDestino(Posicao pOrigem, Posicao pDestino)
+        {
+            if (!tab.peca(pOrigem).podeMoverPara(pDestino))
+            {
+                throw new TabuleiroException("Posição de destino inválida!");
+            }
+        }
+
+        public void mudarJogador()
+        {
+            if(jogadorAtual == Cor.Branca)
+            {
+                jogadorAtual = Cor.Preta;
+            }
+            else
+            {
+                jogadorAtual = Cor.Branca;
+            }
+        }
         public void colocarPecas()
         {
             tab.colocarPeca(new Torre(tab, Cor.Branca), new PosicaoXadrez('c', 1).toPosicao());
