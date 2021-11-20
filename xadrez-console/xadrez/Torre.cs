@@ -10,17 +10,19 @@ namespace xadrez
         private bool podeMover(Posicao pos)
         { 
             Peca p = tab.peca(pos);
-            bool myOutput;
-            if(p == null)
-            {
-                myOutput = true;
-            }
-            else
-            {
-                myOutput= p.cor != cor;
-            }
+            return p == null || p.cor != cor;
+            // Peca p = tab.peca(pos);
+            // bool myOutput;
+            // if(p == null)
+            // {
+            //     myOutput = true;
+            // }
+            // else
+            // {
+            //     myOutput= p.cor != cor;
+            // }
 
-            return myOutput; 
+            // return myOutput; 
         }
 
         public override string ToString()
