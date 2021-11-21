@@ -11,7 +11,8 @@ namespace xadrez
 
         public override string ToString()
         {
-            return "R";
+            ushort codePoint = 0x2654;
+            return $"{(char)codePoint}";
         }
 
         private bool podeMover(Posicao pos)

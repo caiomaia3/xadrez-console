@@ -27,7 +27,8 @@ namespace xadrez
 
         public override string ToString()
         {
-            return "T";
+            ushort codePoint = 0x2656;
+            return $"{(char)codePoint}";
         }
        public override bool[,] movimentosPossiveis()
         {
