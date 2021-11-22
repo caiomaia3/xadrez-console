@@ -99,7 +99,7 @@ namespace xadrez
                     }
                 }
                 // # Jogada especial roque pequeno
-                Posicao posTorre2 = new Posicao(posicao.linha,posicao.coluna+4);
+                Posicao posTorre2 = new Posicao(posicao.linha,posicao.coluna-4);
                 if(torrePodeRoque(posTorre2))
                 {
                     Posicao pos1 = new Posicao(posicao.linha,posicao.coluna-1);
